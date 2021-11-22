@@ -24,7 +24,7 @@ class Home extends Component {
             const response = await fetch(`https://strive-jobs-api.herokuapp.com/jobs?search=${this.state.search}`) 
             const data = await response.json()
             this.props.jobs(data.jobs)
-            console.log(data);
+            console.log("Search Job Data", data);
             if(response.ok){
                 this.setState({
                     ...this.state,
@@ -95,7 +95,7 @@ class Home extends Component {
             <Container fluid className="" >
                 <Row className="justify-content-center my-5 home-body pb-5">
                    <Col md={4} className=" ">
-                       <h4 className="py-3">Search By Job Title</h4>
+                       <h4 className="py-3 title-search">Search By Job Title</h4>
                         <Form inline onSubmit={(e)=>this.searchJobs(e)}>
                             <FormControl
                             value={this.state.search}
@@ -107,12 +107,12 @@ class Home extends Component {
                             type="text" 
                             placeholder="Search" 
                             className=" mr-sm-2" />
-                            <Button type="submit">Submit</Button>
+                            <Button className="mt-4" type="submit">Submit</Button>
                         </Form>
                    </Col>
                    
                    <Col md={4} className="ml-auto">
-                   <h4 className="py-3">Filter by Category</h4>
+                   <h4 className="py-3 category-search">Filter by Category</h4>
                         <Form.Group as={Col} controlId="formGridState">
                             <Form.Control
                             value={this.state.categorySearch}
@@ -135,7 +135,7 @@ class Home extends Component {
                    </Col>
 
                    <Col md={4} className="ml-auto">
-                   <h4 className="py-3">Search By Company Name</h4>
+                   <h4 className="py-3 company-search">Search By Company Name</h4>
                         <Form inline onSubmit={(e)=>this.searchCompanies(e)}>
                             <FormControl
                             value={this.state.companySearch}
@@ -147,7 +147,7 @@ class Home extends Component {
                             type="text" 
                             placeholder="Search" 
                             className=" mr-sm-2" />
-                            <Button type="submit">Submit</Button>
+                            <Button className="mt-4" type="submit">Submit</Button>
                         </Form>
                    </Col>
                 </Row>

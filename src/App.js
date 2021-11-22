@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter,Route } from 'react-router-dom'
 import { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import NavBar from './components/Navbar/NavBar'
@@ -29,10 +29,10 @@ function App() {
   return (
     <BrowserRouter>
     <NavBar/>
-    <Routes>
-    <Route element= {<Home category={categoryData} companies={companiesData} jobs={jobsData}  />} />
-      <Route element={<Details category={searchCategory} companies={searchCompanies} jobs={searchJobs} />} />
-      </Routes>
+
+    <Route exact path="/" render={(routerProps)=> <Home category={categoryData} companies={companiesData} jobs={jobsData} {...routerProps}  />} />
+      <Route exact path="/details/:id" render={(routerProps)=> <Details category={searchCategory} companies={searchCompanies} jobs={searchJobs} {...routerProps}  />} />
+     
     </BrowserRouter>
   );
 }
