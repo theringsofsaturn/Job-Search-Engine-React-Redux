@@ -1,30 +1,27 @@
+import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
-import MainSearch from "./components/MainSearch"
-import CompanySearchResults from "./components/CompanySearchResults"
-
+import MainSearch from "./components/MainSearch";
+import CompanySearchResults from "./components/CompanySearchResults";
+import Favourites from "./components/Favourites";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { configureStore, persistor } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 function App() {
-  const [searchJobs, setSearchJobs] = useState([]);
-  const [searchCompanies, setSearchCompanies] = useState([]);
-  const [searchCategory, setSearchCategory] = useState([]);
-
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainSearch />} />
-        <Route path="/:companyName" element={<CompanySearchResults />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={configureStore}>
+      <PersistGate persistor={persistor} loading={null}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<MainSearch />} />
+            <Route path="/favourites" element={<Favourites />} />
+            <Route path="/:companyName" element={<CompanySearchResults />} />
+          </Routes>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   );
 }
 
 export default App;
-
-{
-  /* <Routes>
-<Route path="/" element={<Home />}/>
-<Route path="/company/:company_name" element={<Company />} />
-</Routes> */
-}
